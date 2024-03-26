@@ -1,0 +1,129 @@
+
+
+
+{% include "admin_base.html" %}
+
+
+{% load static %}
+
+
+
+
+
+<!-- style ______________________________________ style -->
+
+{% block css %}
+
+<style>
+
+
+
+    body {
+        background-color: #f0f8ea; /* Light green background */
+        padding: 20px;
+    }
+
+    .btn-add-product {
+        background-color: #4CAF50; /* Green button */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-add-product:hover {
+        background-color: #45a049; /* Darker green on hover */
+    }
+
+  
+</style>
+
+
+{% endblock css %}
+
+
+
+
+<!-- body ______________________________________ body -->
+
+
+{% block content %}
+
+
+
+<div class="container">
+    <br>
+    <h1>PORDUCTS</h1>
+    <br>
+    {% if messages %}
+        <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" style="color: red;">
+            {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in pro %}
+                        <tr>
+                            <td>{{i.id}} </td>
+                            <td>{{i.name}} </td>
+                            <td>{{i.category.name}} </td>
+                            <td>{{i.price}} </td>
+                            {% if i.image1 %}
+                            <td><img src="{{i.image1.url}}" alt="Product Image" width="70"></td>
+                            {% endif %}
+                            <td>{{i.quantity}} 
+                                {% comment %} <button class="btn btn-sm btn-danger"><a href=""> Varint</a></button> {% endcomment %}
+                            </td>
+                            
+                            <td>
+                                {% comment %} <button class="btn btn-sm btn-warning"><a href="{% url "edit_product", i.id %}"> Edit </a></button> {% endcomment %}
+                                {% comment %} <button class="btn btn-sm btn-warning"><a href="{% url "edit_product", i.id %}">Edit</a></button> {% endcomment %}
+                                <button class="btn btn-sm btn-warning"><a href="{% url "edit_product" i.id %}"> Edit </a></button>
+
+
+                                {% if i.is_listed %}
+                                    <button class="btn btn-sm btn-danger"><a href="/unlist_pro/{{i.id}}"> Unlist</a></button>
+                                {% else %}
+                                    <button class="btn btn-sm btn-danger"><a href="/list_pro/{{i.id}}"> List</a></button>
+                                {% endif %}
+
+
+                        
+                                
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{% url "add_product" %}"><button class="btn btn-add-product">  Add Product </button></a>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}

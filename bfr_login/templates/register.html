@@ -1,0 +1,105 @@
+{% load static %}
+
+{% include "nav.html" %}
+
+
+      <form action="/register/" method='post'>
+      <div id="Registration_page" class="Registration-page animate__animated animate__fadeInUp">
+         <div class="container custom_container">
+            <h1 class="text-center h1_">register to your account </h1>
+            <div id="Registration" class="page-content card card-block p-3 p-sm-4  ">
+               <form class="needs-validation " method="post" novalidate >
+                  <p>Already have an account?<a href="{% url "user_login" %}"> Log in instead!</a></p>
+                  {% csrf_token %}
+
+
+                  <!-- error messages -->
+
+                  {% if messages %}
+
+                  <ul class="messages" style="list-style: none; color:red">
+                  {% for message in messages %}
+                  <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                  {% endfor %}
+                  </ul>
+                  {% endif %}
+
+
+                  
+                  <div class="d-flex">
+                     <div class="form-group col-md-6 pl-0 ">
+                        <label for="f_name" class="font-weight-bolder">First name</label>
+                        <input type="text" class="form-control" id="f_name" name='f_name' required placeholder='enter  your name'>
+                        <div class="invalid-feedback">Please Enter your Name.</div>
+                     </div>
+
+                     {% comment %} <div class="form-group col-md-6 pr-0 " >
+                        <label for="l_name" class="font-weight-bolder">Last name</label>
+                        <input type="text" class="form-control" id="l_name" name='l_name'  required placeholder="enter your lastname" >
+                        <div class="invalid-feedback">Please Enter your Name.</div>
+                     </div> {% endcomment %}
+                  </div>
+
+                  <div class="form-group">
+                     <label for="email" class="font-weight-bolder">Email address</label>
+                     <input type="email" class="form-control" id="email" name='email'  required placeholder='enter your email address'>
+                     <div class="invalid-feedback">Please Enter your Account Name.</div>
+                  </div>
+                  
+                  <div class="form-outline form-white mb-4">
+                    <label class="form-label" for="typeEmailX">Phone number (+91)</label>
+                    <input type="number" id="phone" pattern="[0-9]" name="phone" required placeholder="enter your number" class="form-control form-control-lg" /> 
+                </div>
+
+                  <div class="form-group">
+                     <label for="password" class="font-weight-bolder">Password</label>
+                     <input type="password" class="form-control" id="password" name='password' required placeholder='enter your password'>
+                     <div class="invalid-feedback">Please Enter your password.</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password" class="font-weight-bolder">Confirm password</label>
+                    <input type="password" class="form-control" id="c_password" name='c_password' required placeholder='enter your password' >
+                    <div class="invalid-feedback">Please Enter your password.</div>
+                 </div>
+                  
+                  
+                   <div><button id="clearButton" type="reset" class="btn btn-primary rese float-left mt-3">reset</button>
+                     <input type="submit" name="submit" class="btn btn-primary mt-3 float-right" value="Save"></div>
+               </form>
+            </div>
+         </div>
+      </div>
+    </form>
+      <!-- login_page -->
+      <!-- registration page -->
+      <!-- footer -->
+      
+
+{% include "footer.html" %}
+
+      <!-- footer -->
+     
+         // Disable form submissions if there are invalid fields
+         (function() {
+           'use strict';
+           window.addEventListener('load', function() {
+             // Get the forms we want to add validation styles to
+             var forms = document.getElementsByClassName('needs-validation');
+             // Loop over them and prevent submission
+             var validation = Array.prototype.filter.call(forms, function(form) {
+               form.addEventListener('submit', function(event) {
+                 if (form.checkValidity() === false) {
+                   event.preventDefault();
+                   event.stopPropagation();
+                 }
+                 form.classList.add('was-validated');
+               }, false);
+             });
+           }, false);
+         })();
+      </script>
+ 
+
+
+

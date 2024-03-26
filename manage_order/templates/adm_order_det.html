@@ -1,0 +1,329 @@
+
+
+ {% load static %}
+
+
+
+
+
+
+<head>
+    <title>Plantly</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "assets/img/Favicon.ico" %}">
+    <!-- bootstrap min-->
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/bootstrap.min.css" %}">
+    <!-- fontawesome -->
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/all.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/fontawesome.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/fontawesome.min.css" %}">
+    <!-- OwlCarousel2 -->         
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/owl.carousel.css" %}">
+          <!-- singlepro --> 
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/owl.theme.default.min.css" %}">
+    <!-- fancybox -->
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/jquery.fancybox.css" %}">
+    <!-- animate -->
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/animate.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/media.css" %}">
+    <!-- style -->
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/style.css" %}">
+    <!-- responsive -->
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/responsive.css" %}">
+    <!-- googleapis -->
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html">
+    <link href="../../../fonts.googleapis.com/css238f0.css?family=Rubik:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"> 
+    <!-- drop_down category -->
+    <!-- media -->
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/media.css" %}">
+    <!--  single product -->
+    <!--  magnific-popup -->
+    <link rel="stylesheet" type="text/css" href="assets/css/magnific-popup.css">
+ </head>
+ <style>
+    .option {
+        margin-bottom: 10px;
+      }
+ </style>
+ <div></div>
+
+      
+      <div id="single_product" class="single_product_page animate__animated animate__fadeInUp">
+         
+         
+        {% if messages %}
+            <ul class="messages" style="list-style: none; color:red">
+               {% for message in messages %}
+                  <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+               {% endfor %}
+            </ul>
+         {% endif %}
+      
+        
+      <div class="container sp_pro_container pt-2">
+         <div class="row sh_page bg-white rounded border py-2">
+            
+            <div class="col-xl-4 col-lg-6 col-md-6 col-12 sp_left_product px-2">
+               <div id="content" class="page-content">
+                  <div class="row">
+                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 sp_zoom_pro mb-5">
+                        <img id="zoom_03" src="{{prod_detail.product_name.image1.url}}" class="rounded img-fluid js-product-cover" data-zoom-image="{{prod_detail.product_name.image1.url}}"/>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-xl-8 col-lg-6 col-md-6 col-12 sp_right_product pl-lg-3 pl-2 pr-2">
+               <div class="sp_ri_leftpart">
+                  <div class="sp_product_detail">
+                  <h3 class=""><a href="#">{{prod_detail.product_name.name}}</a></h3>
+                  <hr>
+                  <span class="sp_price font-weight-bold"> Order Id :{{prod_detail.order_id.id}}</span><br>
+
+                  <br><h5 class="">Quantity : {{prod_detail.quantity}}</h5>
+                  <h5 class="">Order Date : {{prod_detail.order_id.order_date}}</h5>
+                  <h5 class="">Payment Method : {{prod_detail.order_id.payment_mode}}</h5>
+
+                  <h5 class="">Amount : {{prod_detail.total_amount}}</h5>
+                  <hr>
+                  <h4> Address</h4>
+                  <hr>
+
+
+                  <div class="order-details row">
+                     <div class="col-md-12">
+                           <p><strong>Name:</strong>{{prod_detail.addr.name}}</p>
+                           <p><strong>Phone Number:</strong> {{prod_detail.addr.number}}</p>
+                           <p><strong>Address:</strong> {{prod_detail.addr.address}}, {{prod_detail.addr.city}},{{prod_detail.addr.state}},{{prod_detail.addr.pincode}},</p>
+                     </div>
+                  </div>
+                  <hr>
+                    
+                
+                    
+
+                    
+                  <div class="sp_add_info my-3">
+                  <ul>
+                     <li class="sku my-2">
+                           <span class="text-uppercase font-weight-bolder tags-title">change order status</span>
+                           <hr>
+                     </li> 
+                     <li class="availability my-2">
+                           <span class="font-weight-bolder tags-title">current status:</span>
+                           <span class="p_quantity">{{prod_detail.status}} </span>
+                           
+                     </li>
+                  </ul>
+                  </div>
+                  <form action="/adm_order_det/{{prod_detail.id}}" method='post'>
+                     {% csrf_token %}
+                  <div class="options">
+                     <div class="option">
+                        <input type="radio" id="confirmed" name="orderStatus" value="confirmed" {% if prod_detail.status == 'confirmed' %} checked {% endif %}>
+                        <label for="confirmed">Order confirmed</label>
+                     </div>
+                     <div class="option">
+                        <input type="radio" id="shipped" name="orderStatus" value="shipped" {% if prod_detail.status == 'shipped' %} checked {% endif %}>
+                        <label for="shipped">Shipped</label>
+                     </div>
+                     <div class="option">
+                        <input type="radio" id="outForDelivery" name="orderStatus" value="outForDelivery" {% if prod_detail.status == 'outForDelivery' %} checked {% endif %}>
+                        <label for="outForDelivery">Out for delivery</label>
+                     </div>
+                     <div class="option">
+                        <input type="radio" id="delivered" name="orderStatus" value="delivered" {% if prod_detail.status == 'delivered' %} checked {% endif %}>
+                        <label for="delivered">Delivery</label>
+                     </div>
+                     </div>
+                  </div>
+                  <button type="submit" class="btn btn-success">Submit</button>
+                  </form>
+
+               </div>
+            </div>
+            
+
+
+         </div>
+      
+      
+      </div>
+         
+      </div>
+      
+
+
+
+      <script src="{% static "assets/js/jquery.magnific-popup.js" %}"></script>
+      <script src="{% static "assets/js/all.min.js" %}"></script>
+      <script src="{% static "assets/js/jquery.elevatezoom.js" %}"></script>
+      <script src="{% static "assets/js/slick.js" %}"></script>
+
+
+
+      <script>	
+
+//gallery  sm-product
+$(document).ready(function() {
+  $("#gallery_02").owlCarousel({
+  itemsCustom : [
+    [0, 3],
+    [375,2],
+    [600, 5],
+    [768,5],
+    [1199,4],
+    [1599,5]
+    ],
+    autoPlay: 4000,
+    loop: true,
+    navigationText: ['<i class="fas fa-long-arrow-alt-left"></i>', '<i class="fas fa-long-arrow-alt-right"></i>'],
+    navigation : false,
+    pagination:false
+  });
+});
+
+if (jQuery(window).width() >= 992){
+         $(document).ready(function () {
+            $("#zoom_03").elevateZoom({
+              gallery:'gallery_02',
+              cursor: 'pointer',
+              easing : true,
+              galleryActiveClass: 'active',
+              imageCrossfade: true,
+              loadingIcon: 'https://www.elevateweb.co.uk/spinner.gif'
+            });
+            //pass the images to Fancybox
+            $("#zoom_03").bind("click", function(e) {
+              var ez = $('#zoom_03').data('elevateZoom');
+              $.fancybox(ez.getGalleryList());
+              return false;
+            });
+         });
+      };
+      if (jQuery(window).width() <= 991){
+         $(document).ready(function () {
+            $('#gallery_02 img').click(function () {
+             var src = $(this).attr('src');
+             ($(this).closest(".sp_pro_container .page-content").find('.js-product-cover').attr('src',src));
+            });
+         });
+      };
+
+
+
+
+      		//getTimeRemaining	
+         function getTimeRemaining(endtime) {
+           var t = Date.parse(endtime) - Date.now();
+           var seconds = Math.floor((t / 1000) % 60);
+           var minutes = Math.floor((t / 1000 / 60) % 60);
+           var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+           var days = Math.floor(t / (1000 * 60 * 60 * 24));
+           return {
+             'total': t,
+             'days': days,
+             'hours': hours,
+             'minutes': minutes,
+             'seconds': seconds
+           };
+         }
+         
+         function initializeClock(id, endtime) {
+           var clock = document.getElementById(id);
+           var daysSpan = clock.querySelector('.days');
+           var hoursSpan = clock.querySelector('.hours');
+           var minutesSpan = clock.querySelector('.minutes');
+           var secondsSpan = clock.querySelector('.seconds');
+         
+           function updateClock() {
+             var t = getTimeRemaining(endtime);
+         
+             if (t.total <= 0) {
+               document.getElementById("clockdiv").className = "hidden-div";
+               document.getElementById("timeIsNow").className = "visible-div";
+               clearInterval(timeinterval);
+               return true;
+             }
+         
+             daysSpan.innerHTML = t.days;
+             hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+             minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+             secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+         
+           }
+         
+           updateClock();
+           var timeinterval = setInterval(updateClock, 1000);
+         }
+         
+         
+         var deadline = '2022-12-14T20:14:00+02:00';
+         
+         initializeClock('clockdiv', deadline);
+         
+         
+         
+         
+         window.onload = function(){
+         // load thumbnails
+         photo       = document.querySelectorAll('.photo-item');
+         photoLength = photo.length;
+         for(i=0; i<photoLength; i++){
+         photoW = photo[i].naturalWidth;
+         photoH = photo[i].naturalHeight;
+         if(photoW >= photoH){
+         photo[i].style.height = '100px';
+         }
+         else{
+         photo[i].style.width = '100px';
+         }
+         }
+         conentW = photoLength * 115;
+         document.getElementById('photo-container').style.width = conentW+'';
+         
+         // load first photo
+         firstPhoto    = document.querySelectorAll('.photo-item');
+         firstPhoto    = firstPhoto[0];
+         firstPhotoUrl = firstPhoto.src;
+         firstPhotoAlt = firstPhoto.alt;
+         document.getElementById('photo-display').innerHTML = '<a href="'+firstPhotoUrl+'" id="selected-photo"><img src="'+firstPhotoUrl+'" id="selected-photo" alt=""></a>';
+         }
+         
+         
+         marginL = 0;
+         function leftRight(obj){
+         spaceLeft   = document.getElementById('photo-container').style.marginLeft;
+         spaceLeft   = spaceLeft.replace('px', null);
+         spaceLeft   = parseInt(spaceLeft);
+         step        = 300;
+         totalLength = document.querySelectorAll('.photo-item').length;
+         totalLength *= -115;
+         objId = obj.id;
+         if(objId == 'left'){
+         if(spaceLeft >= -step){
+         marginL = 0;
+         }
+         else{
+         marginL += step;
+         }
+         }
+         if(objId == 'right'){
+         if(spaceLeft <= totalLength + 500 + step){
+         marginL = totalLength  + 500;
+         }
+         else{
+         marginL -= step;
+         }
+         }
+         document.getElementById('photo-container').style.marginLeft = marginL+'px';
+         }
+         function viewPhoto(obj){
+         objUrl = obj.src;
+         objAlt = obj.alt;
+         document.getElementById('photo-display').innerHTML = '<a href="'+objUrl+'" id="selected-photo"><img src="'+objUrl+'" id="selected-photo" alt=""></a>';
+         }
+         
+      </script>
+  

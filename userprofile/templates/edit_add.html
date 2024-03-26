@@ -1,0 +1,171 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/dashboard.html  22 Nov 2019 10:03:13 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>plantly</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/molla/images/icons/apple-touch-icon.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static "assets/molla/images/icons/favicon-32x32.png" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "assets/molla/images/icons/favicon-16x16.png" %}">
+    <link rel="manifest" href="{% static "assets/molla/images/icons/site.html" %}">
+    <link rel="mask-icon" href="{% static "assets/molla/images/icons/safari-pinned-tab.svg" %}" color="#666666">
+    <link rel="shortcut icon" href="{% static "assets/molla/images/icons/favicon.ico" %}">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="{% static "assets/molla/images/icons/browserconfig.xml" %}">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="{% static "assets/molla/css/bootstrap.min.css" %}">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{% static "assets/molla/css/style.css" %}">
+</head>
+<style>
+    /* Apply light green background to the page-header */
+.page-header {
+    background-color: #f0fff0; /* Light green color */
+}
+
+/* Apply green color to the links in the navigation */
+.nav-dashboard .nav-link {
+    color: green !important;
+}
+
+/* Apply dark green color on hover for the links in the navigation */
+.nav-dashboard .nav-link:hover {
+    color: darkgreen !important;
+}
+
+    
+</style>
+
+<body>
+    
+
+
+
+    <div class="page-wrapper">
+        <main class="main">
+            <div class="container">
+                {% if messages %}
+                <ul class="messages" style="list-style: none; color:red">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="tab-content">
+                            <form action="" method='post'>
+                                {% csrf_token %}
+
+                                <div>
+                                    <br><br><h3>Edit address</h3>
+                                    <br>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="full-name" style="color: green;">Full Name *</label>
+                                            <input type="text" class="form-control" name='edit_name' id="full-name" value={{add.name}} required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="address" style="color: green;">Address *</label>
+                                            <input type="text" class="form-control" name='edit_address' id="address" value={{add.address}} required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="city" style="color: green;">City *</label>
+                                            <input type="text" class="form-control" name='edit_city' id="city" value={{add.city}}  required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="state" style="color: green;">State *</label>
+                                            <input type="text" class="form-control" name='edit_state' id="state" value={{add.state}} required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="post-code" style="color: green;">Post Code *</label>
+                                            <input type="number" class="form-control" name='edit_postcode' id="post-code" value={{add.pincode}} required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="country" style="color: green;">Country *</label>
+                                            <input type="text" class="form-control" name='edit_country' id="country" value={{add.country}} required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="phone-number" style="color: green;">Phone Number *</label>
+                                            <input type="number" class="form-control" name='edit_phone' id="phone-number" value={{add.number}} required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-outline-primary-2" style="color: green;">
+                                            <span>Submit</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                                
+
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End .container -->
+        </main><!-- End .main -->
+    </div><!-- End .page-wrapper -->
+    
+
+
+
+
+
+
+        
+
+    <!-- Plugins JS File -->
+    <script src="{% static "assets/molla/js/jquery.min.js" %}"></script>
+    <script src="{% static "assets/molla/js/bootstrap.bundle.min.js" %}"></script>
+    <script src="{% static "assets/molla/js/jquery.hoverIntent.min.js" %}"></script>
+    <script src="{% static "assets/molla/js/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "assets/molla/js/superfish.min.js" %}"></script>
+    <script src="{% static "assets/molla/js/owl.carousel.min.js" %}"></script>
+    <!-- Main JS File -->
+    <script src="{% static "assets/molla/js/main.js" %}"></script>
+</body>
+
+
+<!-- molla/dashboard.html  22 Nov 2019 10:03:13 GMT -->
+</html>
+

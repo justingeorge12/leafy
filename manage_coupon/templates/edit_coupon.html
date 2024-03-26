@@ -1,0 +1,117 @@
+{% include "admin_base.html" %}
+
+
+
+{% block css %}
+    <style>
+        body {
+            background-color: #f3f9f1; /* Light green background */
+        }
+        .form-control {
+            border-color: #28a745; /* Green border color */
+        }
+        .btn-dark {
+            background-color: #28a745; /* Dark green button background */
+            border-color: #28a745; /* Dark green button border */
+        }
+        .btn-dark:hover {
+            background-color: #218838; /* Darker green on hover */
+            border-color: #218838; /* Darker green border on hover */
+        }
+        .form-check-input:checked {
+            background-color: #28a745; /* Dark green checkbox when checked */
+            border-color: #28a745; /* Dark green checkbox border when checked */
+        }
+    </style>
+{% endblock css %}
+
+
+{% block content %}
+    <div class="container mt-5">
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" style="color: red;">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method='post'>
+            {% csrf_token %}
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Coupon Title</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="ed_title" id="coupon_title" placeholder={{exst_details.title}} >
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Coupon Code</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="ed_code" id="coupon_code" placeholder={{exst_details.code}}  >
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Start Date</label>
+                <div class="col-sm-8">
+                    <input type="date" class="form-control" name="ed_start_date" id="valid_from" value="{% if exst_details.start_date %}{{ exst_details.start_date|date:'Y-m-d' }}{% endif %}" > 
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">End Date</label>
+                <div class="col-sm-8">
+                    <input type="date" class="form-control" name="ed_end_date" id="valid_to" value="{% if exst_details.end_date %}{{ exst_details.end_date|date:'Y-m-d' }}{% endif %}" >
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Quantity</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" name="ed_quantity" id="quantity" min=1 placeholder={{exst_details.quantity}}>
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Minimum Order Amount</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" name="ed_min_amount" id="minimum_order_amount" min=1 placeholder={{exst_details.min_amount}} >
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Discount Amount</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" name="ed_discount_amount" min=1 id="discount_amount" placeholder={{exst_details.discount_amount}} >
+                </div>
+            </div>
+            
+            {% comment %} <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Active</label>
+                <div class="col-sm-8">
+                    <input type="checkbox" class="form-check-input" name="ed_active" id="active" value="1" checked>
+                    <label class="form-check-label" for="active">Active</label>
+                </div>
+            </div> {% endcomment %}
+            
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-8">
+                    <button type="submit" class="btn btn-dark">Edit Coupon</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    
+{% endblock content %}
+
+
+
+
+
+

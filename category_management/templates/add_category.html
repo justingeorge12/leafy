@@ -1,0 +1,78 @@
+
+{% include "admin_base.html" %}
+
+{% block css %}
+
+
+
+<style>
+    body {
+        background-color: #f0f8ea; /* Light green background */
+        padding: 20px;
+    }
+
+    .btn-add-category {
+        background-color: #4CAF50; /* Green button */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-add-category:hover {
+        background-color: #45a049; /* Darker green on hover */
+    }
+</style>
+{% endblock css %}
+
+
+{% block content %}
+<div class="container">
+    <div>
+        <br>
+    </div>
+    <h1 class="text-center">ADD CATEGORY</h1>
+    <form action="" method='post'>
+        {% csrf_token %}
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                {% if messages %}
+                    <div class="messages">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" style="color: red;">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-group text-center">
+                    <label for="categoryName1"></label>
+                    <input type="text" class="form-control" id="categoryName1" name='add_cat' required placeholder="category name">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-group text-center">
+                    <label for="categoryName2"></label>
+                    <input type="text" class="form-control" id="categoryName2" name='add_act' placeholder="action">
+                </div>
+            </div>
+        </div>
+        <div>
+            <br>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <button class="btn btn-add-category">Add Category</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock content %}

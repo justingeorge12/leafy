@@ -1,0 +1,227 @@
+
+{% include "nav.html" %}
+
+
+<style>
+    body {
+        background-color: #f0f8ea; /* Light green background */
+        
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .order-details {
+        border: 1px solid #ddd;
+        padding: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        margin-bottom: 20px;
+    }
+
+    .order-details h2 {
+        margin-bottom: 20px;
+    }
+
+    .order-details p {
+        margin-bottom: 10px;
+    }
+
+    .order-details .row {
+        margin-bottom: 10px;
+    }
+</style>
+
+<body>
+<div class="container">
+    <h2>Address</h2>
+    {% for i in order_items|slice:1 %}
+        <div class="order-details row">
+            <div class="col-md-6">
+                <p><strong>Name:</strong>{{i.addr.name}}</p>
+                <p><strong>Phone Number:</strong> {{i.addr.number}}</p>
+                <p><strong>Address:</strong> {{i.addr.address}}, {{i.addr.city}},{{i.addr.state}},{{i.addr.pincode}},</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Total Amount:</strong> {{i.order_id.total_amount}} </p>
+                <p><strong>Delivery Date:</strong> {{i.order_id.order_date}}</p>
+                <p><strong>Payment Method:</strong> {{i.order_id.payment_mode}} </p>
+                
+                
+            </div>
+        </div>
+    {% endfor %} 
+    <h2>Order Details</h2>
+    {% comment %} <form action="/cancel_order/" method='post'> {% endcomment %}
+      {% csrf_token %}
+    <div class="order-details">
+        <div class="row">
+            <div class="col"><strong>Image</strong></div>
+            <div class="col"><strong>Product Name</strong></div>
+            <div class="col"><strong>Price</strong></div>
+            <div class="col"><strong>Quantity</strong></div>
+            <div class="col"><strong>Total Price</strong></div>
+            <div class="col"><strong>Status</strong></div>
+            <div class="col"><strong>Action</strong></div>
+            {% comment %} <hr> {% endcomment %}
+        </div>
+        <hr><hr>
+        {% for i in order_items %}
+        <div class="row">
+            
+            <div class="col"><img src="{{i.product_name.image1.url}}" alt="Product Image" style="width: 100px;"></div>
+            <div class="col">{{i.product_name.name}}</div>
+            <div class="col">{{i.product_name.price}}</div>
+            <div class="col">{{i.quantity}}</div>
+            <div class="col">{{i.total_amount}}</div>
+            <div class="col">{{i.status}}</div>
+            {% if i.status == 'cancelled'%}
+            <div class="col"><button class="btn btn-danger"  disabled > cancelled </button ></div>
+            
+            {% elif  i.status == 'delivered' %}
+            <div class="col">
+              <a href='#return' class="btn btn-danger" data-toggle="modal" data-target="#returnModal" data-order-id="{{ i.id }}" >
+                Return
+              </a>
+            </div>
+            {% else %}
+             
+
+            <div class="col">
+              <a href="#cancel" class="btn btn-danger" data-toggle="modal" data-target="#cancelModal" data-order-id="{{ i.id }}" name='cancel_order'>
+                  Cancel
+              </a>
+              
+              
+            </div> 
+          
+
+
+            {% comment %} <button class="btn btn-danger" data-toggle="modal" data-target="#cancelModal">Cancel</button> {% endcomment %}
+            {% endif %}
+            
+        </div>
+        <hr>
+        {% endfor %}
+        
+    </div>
+    {% comment %} </form> {% endcomment %}
+</div>
+
+<!-- Modal for cancel the order  -->
+{% for i in order_items %}
+{% comment %} <div class="modal fade" id="cancelModal{{ i.id }}" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel{{ i.id }}" aria-hidden="true"> {% endcomment %}
+<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cancelModalLabel">Cancel Order</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to cancel this order {{i.id}}   ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a href="/cancel_order/{{i.id}}"><button type="button" class="btn btn-danger" id="confirmCancel">
+            
+              Yes, Cancel Order</button>
+              </a>
+        </div>
+      </div>
+    </div>
+  </div> 
+  {% endfor %}
+
+
+  
+<script>
+  $(document).ready(function() {
+      $('#confirmCancel').click(function() {
+          var orderId = $(this).data('orderid');
+          // Now you can make an AJAX call to your Django view passing the orderId
+          // Example:
+          // $.ajax({
+          //     url: '/your-view-url/',
+          //     type: 'POST',
+          //     data: {'order_id': orderId},
+          //     success: function(response) {
+          //         // Handle success response
+          //     },
+          //     error: function(xhr, errmsg, err) {
+          //         // Handle error
+          //     }
+          // });
+          console.log('Order ID:', orderId);
+      });
+  });
+</script>
+
+
+
+
+  <!-- Modal for Return Confirmation -->
+  {% for i in order_items %}
+<div class="modal fade" id="returnModal" tabindex="-1" role="dialog" aria-labelledby="returnModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="returnModalLabel">Return Order</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to return this order?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a href="/return_order/{{i.id}}"><button type="button" class="btn btn-danger" id="confirmReturn">
+            Yes, Return Order
+          </button>
+          </a>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  
+  
+
+  
+  </body>
+  </html>
+  
+  <!-- JavaScript for Cancel Confirmation -->
+  <script>
+      // Handle confirmation of cancel action
+      document.getElementById('confirmCancel').addEventListener('click', function() {
+          // Here you can add logic to actually cancel the order, for now let's just close the modal
+          $('#cancelModal').modal('hide');
+      });
+  </script>
+
+  <!-- JavaScript for Return Confirmation -->
+<script>
+    // Handle confirmation of return action
+    document.getElementById('confirmReturn').addEventListener('click', function() {
+        // Here you can add logic to actually return the order, for now let's just close the modal
+        $('#returnModal').modal('hide');
+    });
+</script>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+</html>
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .confirmation-container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #28a745;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <h2>Your Order is Confirmed!</h2>
+        <p>Thank you for shopping with Plantly 😍</p>
+        <h3>Order Details</h3>
+        <p>Order ID: {{order_detail.id}}</p>
+        <p>Date: {{order_detail.order_date}}</p>
+        <p>Total Amount: Rs. {{order_detail.total_amount}}</p>
+        {% comment %} <p>Deliver to: {{order_detail.address}}</p> {% endcomment %}
+        <p>Deliver to: sebin's address</p>
+        <p>Expected Delivery Date: {{exp_day}}</p>
+        <a href="/order_detail/{{order_detail.id}}" class="button">View Your Order</a>
+        <a href="{% url "shop" %}" class="button">Continue Shopping</a>
+    </div>
+</body>
+</html>

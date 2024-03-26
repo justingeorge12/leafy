@@ -1,0 +1,74 @@
+{% include "nav.html" %}
+      <!-- container  menu_slider mt-4 -->
+      <!-- vertical menu and slider end -->
+      <!-- forgot page -->
+      <div id="forgot_page" class="forgot-page animate__animated animate__fadeInUp">
+         <div class="sp_header bg-white p-3">
+            <div class="container custom_container">
+               <div class="row ">
+                  <div class="col-12 ">
+                     <ul>
+                        <li class="d-inline-block font-weight-bolder"><a href="{% url "home" %}">home</a></li>
+                        <li class="d-inline-block hr_ font-weight-bolder"><a href="#">Forgot password</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="container custom_container ">
+            <h3 class="text-center">Forgot your password?  </h3>
+            <div id="forgot" class="page-content card card-block p-3 p-sm-4">
+
+                {% if messages %}
+                    <ul class="messages" style="list-style: none; color:red">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+
+               <form  class="needs-validation " method="post" novalidate>
+                {% csrf_token %}
+                  <div class="form-group">
+                     <p class="renew_pass text-muted ">Please enter the email address you used to register. You will receive a OTP in your email to reset your password.</p>
+                     <label class="font-weight-bolder">Email address</label>
+                     <input type="email" class="form-control" required name='fo_email'>
+                     <div class="invalid-feedback">Please Enter your account name.</div>
+                  </div>
+                  <input type="submit" name="submit" class="btn btn-primary mt-3" value="send">
+               </form>
+            </div>
+         </div>
+      </div>
+      <!-- login_page -->
+      <!-- forgot page  -->
+      <!-- footer -->
+      {% include "footer.html" %}
+      
+
+
+      <script>
+         // Disable form submissions if there are invalid fields
+         (function() {
+           'use strict';
+           window.addEventListener('load', function() {
+             // Get the forms we want to add validation styles to
+             var forms = document.getElementsByClassName('needs-validation');
+             // Loop over them and prevent submission
+             var validation = Array.prototype.filter.call(forms, function(form) {
+               form.addEventListener('submit', function(event) {
+                 if (form.checkValidity() === false) {
+                   event.preventDefault();
+                   event.stopPropagation();
+                 }
+                 form.classList.add('was-validated');
+               }, false);
+             });
+           }, false);
+         })();
+      </script>
+      
+   
+
+
+

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Form</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+        body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+        }
+        .form-container {
+          max-width: 600px;
+          background-color: #f8f9fa;
+          padding: 30px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn-outline-primary {
+          color: #28a745;
+          border-color: #28a745;
+          border-width: 2px;
+        }
+        .btn-outline-primary:hover {
+          background-color: #28a745;
+          color: #ffffff;
+          border-color: #ffffff;
+        }
+        .txt:hover {
+            color: #ffffff
+        }
+      
+
+
+  </style>
+</head>
+<body>
+    
+  <div class="form-container">
+    {% if messages %}
+                <ul class="messages" style="list-style: none; color:red">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="full-name" style="color: green;">Full Name *</label>
+              <input type="text" class="form-control" name="full_name" id="full-name" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="address" style="color: green;">Address *</label>
+              <input type="text" class="form-control" name="address" id="address" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="city" style="color: green;">City *</label>
+              <input type="text" class="form-control" name="city" id="city" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="state" style="color: green;">State *</label>
+              <input type="text" class="form-control" name="state" id="state" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="post-code" style="color: green;">Post Code *</label>
+              <input type="number" class="form-control" name="postcode" id="post-code" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="country" style="color: green;">Country *</label>
+              <input type="text" class="form-control" name="country" id="country" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="phone-number" style="color: green;">Phone Number *</label>
+              <input type="number" class="form-control" name="phone" id="phone-number" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-outline-primary" style="color: #28a745; border-color: #28a745;">
+              <span class='txt' >Submit</span>
+              <i class="icon-long-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

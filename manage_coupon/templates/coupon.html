@@ -1,0 +1,130 @@
+
+
+
+{% include "admin_base.html" %}
+
+
+{% load static %}
+
+
+
+
+
+<!-- style ______________________________________ style -->
+
+{% block css %}
+
+<style>
+
+
+
+    body {
+        background-color: #f0f8ea; /* Light green background */
+        padding: 0px;
+        margin-left: 0px;
+    }
+
+    .btn-add-product {
+        background-color: #4CAF50; /* Green button */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-add-product:hover {
+        background-color: #45a049; /* Darker green on hover */
+    }
+
+  
+</style>
+
+
+{% endblock css %}
+
+
+
+
+<!-- body ______________________________________ body -->
+
+
+{% block content %}
+
+
+
+<div class="container">
+    <br>
+    <h1>coupon</h1>
+    <br>
+    {% if messages %}
+        <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" style="color: red;">
+            {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            <a href="create_coupon"><button class="btn btn-add-product">  Add coupon </button></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Discount </th>
+                        <th>Minimum Amount</th>
+                        <th>Quantity</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in coupons %}
+                    <tr>
+                        <td>{{i.id}} </td>
+                        <td>{{i.title}}</td>
+                        <td>{{i.code}}</td>
+                        <td>{{i.discount_amount}}</td>
+                        <td>{{i.min_amount}}</td>
+                        <td>{{i.quantity}}</td>
+                        
+                        <td>{{i.start_date}}</td>
+                        <td>{{i.end_date}}</td>
+                        
+                        <td>
+                            {% if i.active %}
+                                <a href="/inactive/{{i.id}}"><button class="btn btn-sm btn-danger">Inactivate</button></a>
+                            {% else %}
+                                <a href="/active/{{i.id}}"><button class="btn btn-sm btn-danger">Activate</button></a>
+                            {% endif %}
+                           
+                            <a href="/edit_coupon/{{i.id}}"><button class="btn btn-sm btn-warning" style= "margin-top:6px;">Edit</button></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+{% endblock content %}
+
+
+
+
+

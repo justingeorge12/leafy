@@ -1,0 +1,175 @@
+
+{% include "admin_base.html" %}
+
+
+{% block css %}
+<style>
+
+    
+    body {
+        background-color: #f0f8ea; /* Light green background */
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-add-product {
+        background-color: #4CAF50; /* Green button */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-add-product:hover {
+        background-color: #45a049; /* Darker green on hover */
+    }
+
+    
+</style>
+{% endblock css %}
+
+
+
+
+{% block content %}
+
+
+<div class="container">
+    
+    <div><br></div>
+    
+    <h1>ADD PRODUCT</h1>
+    {% if messages %}
+        <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" style="color: red;">
+            {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+    
+   
+    <Form action='/add_product/' method='post' enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input required type="text" class="form-control" minlength='4' id="productName" name='pd_name' >
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <div class="dropdown">
+                        {% comment %} <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdown" name='category'  data-bs-toggle="dropdown" aria-expanded="false">
+                            Select Category
+                        </button> {% endcomment %}
+                        {% comment %} <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+
+                             {% for i in cat %}
+                            <li><a class="dropdown-item" href="/add_product/{{i.id}}">{{i.name}} </a></li>
+
+                            {% endfor %}  {% endcomment %}
+                            
+                            <select required id="product_categorie" name="category" class="form-control">
+                            {% for i in cat %}
+
+                                <option value="{{i.id}}">{{i.name}} </option>
+                            
+                            {% endfor %}
+                            </select>
+                            
+                        {% comment %} </ul> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input required type="number" class="form-control" id="price" name='price' >
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="price">Original Price</label>
+                    <input type="number" class="form-control" id="price" name='og_price' >
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" required class="form-control" id="quantity" name='quantity'>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="productName">Color</label>
+                    <input type="text" class="form-control" id="productName" name='color' >
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="productName">Vendor</label>
+                    <input type="text" class="form-control" id="productName" name='vendor' >
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name='description' rows="5" ></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="image1">Image 1</label>
+                    <input type="file" required class="form-control" id="image1" name='image1'>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="image2">Image 2</label>
+                    <input type="file" class="form-control" id="image2" name='image2'>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="image3">Image 3</label>
+                    <input type="file" class="form-control" id="image3" , name='image3'>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="image4">Image 4</label>
+                    <input type="file" class="form-control" id="image4" name='image4'>
+                </div>
+            </div>
+        </div>
+        {% comment %} <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-add-product" >Add Product</button>
+            </div> {% endcomment %}
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary" name='' value="Submit">
+                </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock content %}

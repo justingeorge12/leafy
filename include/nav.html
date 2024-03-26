@@ -1,0 +1,244 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html class="" lang="en">
+   
+<!-- Mirrored from dostguru.com/HTML/plantly/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Nov 2023 08:19:00 GMT -->
+<head>
+      <title>Plantly</title>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Favicon -->
+      <link rel="shortcut icon" type="image/x-icon" href="{% static "assets/img/Favicon.ico" %}">
+      <!-- bootstrap min-->
+      <link rel="stylesheet" type="text/css" href="{% static "assets/css/bootstrap.min.css" %}">
+      <!-- fontawesome -->
+      <link rel="stylesheet" type="text/css" href="{% static "assets/css/all.min.css" %}">
+      <link rel="stylesheet" type="text/css" href="{% static "assets/css/fontawesome.css" %}">
+      <link rel="stylesheet" type="text/css" href="{% static "assets/css/fontawesome.min.css" %}">
+      <!-- OwlCarousel2 -->         
+      <link rel="stylesheet" type="text/css" href="{% static "assets/css/owl.carousel.css" %}">
+            <!-- singlepro --> 
+      <link rel="stylesheet" type="text/css" href="{% static "assets/css/owl.theme.default.min.css" %}">
+      <!-- fancybox -->
+      <link rel="stylesheet" type="text/css" href="{% static "assets/css/jquery.fancybox.css" %}">
+      <!-- animate -->
+      <link rel="stylesheet" type="text/css" href="{% static "assets/css/animate.min.css" %}">
+      <link rel="stylesheet" type="text/css" href="{% static "assets/css/media.css" %}">
+      <!-- style -->
+      <link rel="stylesheet" type="text/css" href="{% static "assets/css/style.css" %}">
+      <!-- responsive -->
+      <link rel="stylesheet" type="text/css" href="{% static "assets/css/responsive.css" %}">
+      <!-- googleapis -->
+      <link rel="preconnect" href="../../../fonts.gstatic.com/index.html">
+      <link href="../../../fonts.googleapis.com/css238f0.css?family=Rubik:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"> 
+      <!-- drop_down category -->
+      <!-- media -->
+      <link rel="stylesheet" type="text/css" href="{% static "assets/css/media.css" %}">
+      <!--  single product -->
+      <!--  magnific-popup -->
+      <link rel="stylesheet" type="text/css" href="assets/css/magnific-popup.css">
+   </head>
+   <body>
+<!-- nav bar -->
+
+<header>
+
+    {% comment %} <div class="topbar-outer py-2 border-bottom d-md-none d-none d-none d-lg-block">
+       <div class="">
+          <div class="row">
+             <div class="col-lg-5 col-md-4 col-sm-4 topbar_left">
+                <ul>
+                   <li>
+                      <span class="font-weight-bolderer">Get 30% Off On Selected Items</span>
+                   </li>
+                </ul>
+             </div>
+             <!-- col-lg-5 col-md-4 col-sm-4 hidden-md-down topbar_left -->
+             <div class="col-lg-7 col-md-8 col-sm-8 text-xs-right  topbar_right text-right">
+                <nav class="navbar d-flex align-items-center  justify-content-end">
+                   <div class="dropdown right1 md_2 hr_">
+                      <span class="dropdown-toggle lng-select-menu" role="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <select class=" select-menu form-select d-none d-sm-block" >
+                            <option value="selected">English <i class="fas fa-angle-down"></i></option>
+                            <option value="1">Polski</option>
+                            <option value="2">Romana</option>
+                            <option value="3">Deutsch</option>
+                         </select>
+                      </span>
+                   </div>
+                   <div class="dropdown right1 md_1">
+                       <span class="dropdown-toggle lng-select-menu" role="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <select class=" select-menu form-select d-none d-sm-block" >
+                            <option value="selected">EUR €<i class="fas fa-angle-down"></i></option>
+                            <option value="1">USD $</option>
+                         </select>
+                      </span>
+                   </div>
+                   
+                </nav>
+             </div>
+             <!-- col-lg-7 col-md-8 col-sm-8 text-xs-right hidden-md-down topbar_right text-right -->
+          </div>
+          <!-- row -->
+       </div>
+       <!-- container  -->
+    </div> {% endcomment %}
+
+
+
+    <!-- topbar-outer py-2 border-bottom<-->
+
+    <!-- second row -->
+    <div class="header-top py-4 border-bottom sticky-md-top">
+       <div class="header-top-container">
+          <div class="row header_row">
+             <div class="col-xl-2 col-lg-2 col-6  head-logo pl-md-0">
+                <div class="text-left header-top-left pt-2"><a href="{% url "home" %}"><img src="{% static "assets/img/logo.png" %}" class="img-responsive img" alt="logo"></a></div>
+             </div>
+             <!-- col-xl-2 col-lg-2 col-md-2 col-sm-3 head-logo -->
+             <div class="col-xl-10 col-lg-10 col-6  head-search">
+                <div class="d-flex navbar">
+                   <div class="input-class  text-left col-xl-8 col-lg-7 col-md-12  ">
+                      <div class="between-header border border-danger rounded mb-0 head-left">
+                         
+                         <div class="input-group">
+                            <input type="text" placeholder="search" class="form-control" aria-label="search" aria-describedby="button-addon2">
+                            <div class="input-group-btn"><button type="button" class="btn btn-danger text-uppercase font-weight-normal">search</button></div>
+                         </div>
+                      </div>
+
+                      
+                      <!-- between-header text-left col-sm-8 head-left border border-danger rounded mb-0 -->
+                   </div>
+                   <div class="col-xl-4 col-lg-5 head-right text-right">
+                      <ul class="top_cart">
+                         <li class="dropdown right1 md_acc md_acco">
+                            <span class="account-block">
+                            </span>
+                            {% comment %} {% if user.is_authenticated %} {% endcomment %}
+                            {% if 'email' in request.session %}
+                            <span class="dropdown-toggle my_account" role="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{nam.username}}
+                              <a href="#">
+                              </a>
+                              </span>
+                              {% else %}
+
+                            {% comment %} {% else %} {% endcomment %}
+                            <span class="dropdown-toggle my_account" role="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My account
+                            <a href="#">
+                            </a>
+                            </span>
+                            {% endif %}
+                            
+                            <span class="dropdown-menu r_menu dropdown-menu-right" >
+                              
+                              {% if 'email' in request.session %}
+
+                              <a class="dropdown-item font-weight-bolderer" href="{% url "user_logout" %}">log out</a>
+                              <a class="dropdown-item font-weight-bolderer" href="{% url "user_profile" %} ">Profile</a>
+                              {% comment %} <a class="dropdown-item font-weight-bolderer" href="{% url "order_detail" %} ">Profile</a> {% endcomment %}
+                            
+
+                              
+                              {% else %}
+                              
+                            <a class="dropdown-item font-weight-bolderer" href="{% url "user_login" %}">log in</a>
+                            <a class="dropdown-item font-weight-bolderer" href="{% url "register" %}">register</a>
+                            
+                            {% endif %}
+                            </span>
+                         </li>
+
+                         
+                           <li class="dropdown d-inline-block my-wishlist md_acco">
+                              <a href="{% url "wishlist" %}" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+                                  <i class="fas fa-heart fa-lg"  style="color: lightgreen; font-size: 25px; "></i>
+                              </a>
+                          </li>
+                          
+                        
+                         
+                         <li class="dropdown d-inline-block my-cart md_acco">
+                            {% comment %} <a href="{% url "showcart" %}"  class="cart-qty">
+                            <span class="cart-contents">
+                            </span>
+                            <span class="d-lg-inline-block d-md-none d-sm-none d-none align-middle font-weight-bolderer"></span><span class="price_cart d-md-inline-block align-middle font-weight-bolderer">2</span>
+                            </a> {% endcomment %}
+                            <span class="dropdown-toggle Price-amount" role="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </span>
+                            <a href="{% url "showcart" %}">cart</a>
+                            
+                         </li>
+                      </ul>
+                   </div>
+                   <!-- col-sm-4 head-right text-right -->
+                </div>
+                <!-- row -->
+             </div>
+             <!-- col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 head-search -->
+          </div>
+          <!-- row -->
+       </div>
+       <!--  container  -->
+    </div>
+    <!-- header-top py-4 border-bottom-->
+    <!-- third row -->
+    <!-- third row -->
+   
+
+             <div class="header_bottom shadow-sm rounded d-md-none d-sm-none d-none d-lg-block">
+    <div class="">
+       <div class="row">
+          <div class="col-lg-12 text-left">
+             <ul class="main-menu navbar">
+                <li><a href="{% url "home" %}">Home</a></li>
+                <li>
+             <li><a href="{% url "shop" %}">shop</a></li>
+             
+          </li>
+          </li>
+          <li class="dropdown mega_menu m1 level-1 font-weight-bolderer">
+             <a class="dropdown-toggle" href="single-product.html"  role="button" data-toggle="dropdown" aria-expanded="false">category&nbsp;<span class="float-right"><i class="fas fa-angle-down"></i></span></a>
+             <ul class="dropdown-menu">
+                <li>
+                   <ul class="row mx-0">
+                      <li class="mg_menu col-lg-3 col-md-12 ">
+                         <ul class="sub-category">
+                            {% for i in catt %}
+                            <li class="d-block"><a class="dropdown-item font-weight-bolderer" href="/drop_category/{{i.id}}">{{i.name}}</a></li>
+                            {% endfor %}
+                            
+                         </ul>
+                      </li>
+                      
+                      <li class="mg_menu col-lg-3 col-md-12">
+                         <ul>
+                            <li class="d-block"><a href="single-product.html"><img src="{% static "assets/img/m_menu.jpg" %}" class="fst-image mx-auto d-block mb-1 img-fluid" alt="m_menu"></a></li>
+                         </ul>
+                      </li>
+                   </ul>
+                </li>
+             </ul>
+          </li>
+          
+          <li><a href="{% url "gallery" %}">gallery</a></li>
+          <li><a href="{% url "about_us" %}">about us</a></li>
+          
+          <li><a href="{% url "contact_us" %} ">contact-us</a></li>
+       </ul>
+    </div>
+    <!-- col-lg-12 text-left -->
+    </div>
+          <!-- row -->
+       </div>
+       <!-- container  -->
+    </div>
+    <div>
+        <br>
+    </div>
+
+
+    <!-- header_bottom shadow-sm rounded  -->
+ </header>

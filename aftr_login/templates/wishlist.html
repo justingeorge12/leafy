@@ -1,0 +1,124 @@
+{% load static %}
+ {% include "nav.html" %}
+      <!-- wishlist page -->
+      <div id="wishlist_page" class="wishlist-page animate__animated animate__fadeInUp">
+         {% if messages %}
+            <ul class="messages" style="list-style: none; color:red">
+               {% for message in messages %}
+                  <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+               {% endfor %}
+            </ul>
+         {% endif %}
+         
+         <div class="sp_header bg-white p-3 ">
+            <div class="container custom_container ">
+               <div class="row ">
+                  <div class="col-12 ">
+                     <ul>
+                        <li class="d-inline-block font-weight-bolder"><a href="{% url "home" %}">home</a></li>
+                        <li class="d-inline-block hr_ font-weight-bolder"><a href="#">wishlist</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="container custom_container">
+            {% if products %}
+            {% for i in products %}
+               <div class="row sh_page border-bottom">
+                  
+
+                  
+
+                  <div class="col-12 col-md-6 pr-0">
+                     <div class="d-flex">
+                        <div class=" col-xl-4 col-lg-5 col-md-5 col-4 px-0">
+                           <a href="/one_product/{{i.product_id.id}}"><img src="{{i.product_id.image1.url}}" class="fst-image mx-auto d-block img-fluid" alt="product_13"></a>
+                        </div>
+                        <div class=" col-xl-8 col-lg-7 col-md-7 col-8 pr-0">
+                           <h5 class="w_product_name  mb-2 mb-sm-3 mb-xl-3 mt-sm-2 mt-md-2"><a href="/one_product/{{i.product_id.id}}">{{i.product_id.name}}</a></h5>
+                           
+                           {% comment %} <ul>
+                              <li class="my-1 f_13">
+                                 <span>size:</span>
+                                 <span>s</span>
+                              </li>{% endcomment %}
+                              <li class="f_13">
+                                 <span>color:</span>
+                                 <span>{{i.product_id.color}}</span>
+                              </li>
+                           </ul> 
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-12 col-md-6 mt-4 pl-0">
+                     <div class="d-flex">
+                        <div class="col-md-4 col-sm-4 col-4 ">
+                           <span class="font-weight-bold">{{i.product_id.price}} </span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-5 text-center">
+                           <span class="font-weight-bolder"><span class="d-xl-inline-block d-none">availability : </span>{{i.product_id.quantity}} </span>
+                        </div>
+                        
+                     </div>
+                     <div class="col-md-12 col-sm-12 col-12 text-right ">
+                        <a href="/deletewish/{{i.id}}"><i class="fas fa-trash-alt "></i></a>
+                     </div>
+                     <div class="col-md-12 col-sm-12 col-12 text-right mt-5">
+                        <a href="/movetocart/{{i.id}}" ><i class="fas fa-cart-plus"></i></a>
+                    </div>
+                  </div>
+                  
+               </div>
+            {% endfor %}
+            
+            {% else  %}
+            <p class="text-center cartempty1">Your wishlist is empty !</p>
+            
+            {% endif %}
+         </div>
+         <!-- container custom_container -->
+      </div>
+      <!-- portfolio_2_page -->
+      <!-- wishlist page end -->
+      
+      
+       
+      <!-- scroll -->
+      <a href="#" id="scroll"></a>
+      <!-- jquery-3.4.1 -->
+      <script src="{% static "assets/js/jquery-3.4.1.min.js" %}"></script>
+      <!-- owl.carousel -->
+      <script src="{% static "assets/js/owl.carousel.js" %}"></script>
+      <!-- bootstrap.min -->
+      <script src="{% static "assets/js/bootstrap.min.js" %}"></script>
+      <!-- popper.min -->
+      <script src="{% static "assets/js/popper.min.js" %}"></script>
+      <!-- wow.js - v1.2.1 -->
+      <script src="{% static "assets/js/wow.min.js" %}"></script>
+      <!-- Font Awesome Free 5.15.1 -->
+      <script src="{% static "assets/js/all.min.js" %}"></script>
+      <!-- custom js -->
+      <script src="{% static "assets/js/custom.js" %}"></script>
+
+      <script>
+      	//wishlist
+     	$( document ).ready(function(){
+		  $( ".wishlist-p-dlt" ).click(function() {
+		    $(this).fadeOut( "slow", function() {
+		      // After animation completed:
+		      $(this).parent().remove();
+		    });
+		    $( this ).fadeOut( "slow", function() {
+		      // After animation completed:
+		      $( this ).remove();
+		    });
+		  });
+		 });	
+      </script>
+   </body>
+
+<!-- Mirrored from dostguru.com/HTML/plantly/wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Nov 2023 08:19:00 GMT -->
+
+
+{% include "footer.html" %}

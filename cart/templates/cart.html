@@ -1,0 +1,284 @@
+    {% comment %} {% load static %} {% endcomment %}
+
+
+    {% include "nav.html" %}
+    <body>
+
+        
+
+        <style>
+         .custom-button {
+             background-color: orange;
+             border: none;
+             margin-left: 10px;
+             padding: 5px 10px;
+             text-decoration: none;
+             display: inline-block;
+         }
+     </style>
+
+      <!-- cart page -->
+      <div id="cart_page" class="cart-page animate__animated animate__fadeInUp">
+         <div class="sp_header bg-white p-2 ">
+            <div class="container custom_container ">
+               <div class="row ">
+                  <div class="col-12 ">
+                     <ul class="p-md-3 p-2 bg-light">
+                        <li class="d-inline-block font-weight-bolderer"><a href="{% url "home" %}">home</a></li>
+                        <li class="d-inline-block  font-weight-bolderer"><a href="#" class="hr_">Cart</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="container custom_container ">
+            <div class="row">
+               <div class="col-12">
+                  <div class="title_outer">
+                     <h1 class="mb-3 d-inline-block pb-3 position-relative border-bottom h1_">Cart</h1>
+                  </div>
+                  <!-- title_outer -->
+               </div>
+               <!-- col-12 -->
+            </div>
+            <!-- row -->
+            {% if messages %}
+
+                  <ul class="messages" style="list-style: none; color:red">
+                  {% for message in messages %}
+                  <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                  {% endfor %}
+                  </ul>
+                  {% endif %}
+            <div class="row">
+               
+
+
+               <div class="col-12 col-lg-8">
+                  <div class="card" id="reload">
+                     <div class="card-header cart_header bg-white">
+                        <div class="card-title mb-0">
+                           <div class="row">
+                              <div class="col-12">
+                                 <h5 class="mb-0"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;Shopping Cart</h5>
+                                 
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     {% if items %}
+                     <div class="card-body cart_body">
+                     
+                        
+                        {% for i in items %}
+                        <form method="post" action='/placeorder/' enctype="multipart/form-data">
+                           {% comment %} action="/update_quant/{{i.product_id.id}}" {% endcomment %}
+                        <div class="row ">
+                           <!-- <div class="col-12 my-2 mt-1 text-right ">
+                              <a href="#"><i class="fas fa-trash-alt"></i></a>
+                            </div> -->   
+                           <div class="col-12 col-md-6 pr-0">
+                              <div class="d-flex">
+                                 <div class=" col-xl-4 col-lg-5 col-md-4 col-4 px-0">
+                                    <a href="/one_product/{{i.product_id.id}}"><img src="{{i.product_id.image1.url}}" class="fst-image mx-auto d-block img-fluid" alt="product_13"></a>
+                                 </div>
+                                 <div class=" col-xl-8 col-lg-7 col-md-8 col-8 pr-0">
+                                    <h4 class="product-name font-weight-bolder mb-2 mb-sm-3 mb-xl-3 mt-sm-2 mt-md-2"><a href="#">{{ i.product_id.name }} </a></h4>
+                                    <div><span class="font-weight-bolderer price">{{i.product_id.price}} </span> <del class="text-muted">{{i.product_id.og_price}}</del></div>
+                                    <div class="my-1 f_13">
+                                       <span>Quantity:</span>
+                                       <span>{{i.quantity}} </span>
+                                    </div>
+                                    <div class="f_13">
+                                       <span>stock</span>
+                                       <span>{{i.product_id.quantity }} </span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-12 col-md-6 mt-4">
+                              <div class="d-flex">
+                                 <div class="col-md-3 col-sm-4 col-5 text-left text-md-right my-2 ">
+                                    <span class="font-weight-bolder">{{i.total}} </span>
+                                 </div>
+
+
+
+                                 {% comment %} <div class="sp_counter ">
+                                    <div class="input-group">
+                                       <span class="input-group-btn">
+                                       <button type="button" class="btn btn-default btn-number p-0" data-type="minus" data-field="qantity"><span class="minus">-</span></button>
+                                       </span>
+                                       <input type="number" readonly name="qantity" class="form-control input-number" value={{i.quantity}} min="1" max="6" >
+                                       <br><br>
+                                       
+                                       <br>
+                                       <span class="input-group-btn">
+                                       <button type="button" class="btn btn-default btn-number p-0" data-type="plus" data-field="qantity"><span class="plus">+</span></button>
+                                       </span>
+                                    </div>
+                                 </div> {% endcomment %}
+
+
+
+                                <td class="quantity">
+                                 <input type="hidden" class="pro_id" value="{{ i.id }}" />
+                                 {% csrf_token %}
+                                 <div class="input-group mb-3">
+                                    {% if i.quantity < 2 %}
+                                   <div class="input-group-prepend">
+                                     <button class="change_quantity quantity-left-minus btn btn-outline-secondary"  data-action="minus" data-product-id="{{ i.id }}" disabled> - </button>
+                                   </div>
+                                   {% else %}
+                                   <div class="input-group-prepend">
+                                    <button class="change_quantity quantity-left-minus btn btn-outline-secondary"  data-action="minus" data-product-id="{{ i.id }}"> - </button>
+                                  </div>
+                                   {% endif %}
+       
+                                   <input type="text" name="quantity" class="quantity1 form-control input-number" value="{{ i.quantity }}" min="1"  max="3"  oninput="validity.valid||(value='');" readonly />
+                                   <div class="input-group-append">
+                                     <button class="change_quantity quantity-right-plus btn btn-outline-secondary" data-action="plus" data-product-id="{{ i.id }}"> + </button>
+                                   </div>
+                                 </div>
+                               </td>
+
+
+                                <br>
+                                <div>
+
+                                 <button class="custom-button"><a href="/remove/{{i.id}}"> x </a></button>
+                                </div>
+                                
+
+                              </div>
+                           </div>
+                        </div>
+                        <hr>
+                     {% endfor %}
+                      
+
+                        <div class="card-footer">
+                        <div class="row">
+                           <div class="col-6 col-sm-7 text-right">
+                              <div class="my-2 font-weight-bolder">
+                                 <span>total:</span>
+                                 <span>{{ amount }}</span>
+                              </div>
+                           </div>
+                           <div class="col-6 col-sm-5 checkout-btn">
+                              <a href="{% url "placeorder" user.id  %}" class="btn btn-block f_13 font-weight-bolder">Checkout</a>
+                           </div>
+                        </div>
+                     </div>
+
+                  </form> 
+
+                     </div>
+                     {% else %}
+
+                     <p class="text-center cartempty1">Your Shopping cart is empty !</p>
+                     {% endif %}
+                  </div>
+               </div>
+               <div class="col-12 col-lg-4">
+                  <div class="border rounded bg-white final_payment" id="2load">
+                     <div class="card-body  border-bottom">
+                        <p class="text-muted">{{cnt}} items </p>
+                        <p class="font-weight-bolderer">show details</p>
+                        <hr><hr>
+                        
+                        {% if items %}
+                           {% for i in items %}
+                              <div>
+                                 <span class="font-weight-bolder">{{i.product_id.name}} *</span>
+                                 <span class="font-weight-bolder">{{i.quantity}} </span>
+                                 <span class="float-right font-weight-bolder">{{i.total}} </span>
+                              </div>
+                              <hr>
+                           {% endfor %}
+                        {% endif %}
+                     </div>
+                     <div class="card-body ">
+                        <div>
+                           <span class="font-weight-bolder">total</span>
+                           <span class="float-right font-weight-bolder">{{amount}}</span>
+                        </div>
+                        
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+
+
+
+
+      <!-- footer -->
+     {% include "footer.html" %}
+     
+
+
+    
+
+
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <!--Ajax for changing quantity-->
+    <script>
+      $(document).ready(function () {
+        $('#reload').on('click', '.change_quantity', function (e) {
+          e.preventDefault()
+      
+          var products_id = $(this).data('product-id')
+      
+          var token = $('input[name=csrfmiddlewaretoken]').val()
+      
+          var action = $(this).data('action')
+          $.ajax({
+            method: 'POST',
+            url: '/update_quant/',
+            data: {
+              products_id: products_id,
+              action: action,
+              csrfmiddlewaretoken: token
+            },
+      
+            success: function (response) {
+              if (response.status) {
+                $('#reload').load('/showcart/ #reload')
+                $('#2load').load('/showcart/ #2load')
+              }
+            },
+            error: (error) => {
+              console.log(error)
+            }
+          })
+        })
+      })
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Toast for message -->
+    <script>
+      $(document).ready(function () {
+        $('.toast').toast('show')
+      })
+    </script>
+
+
+
+
+
+
+
+   </body>
+
+</html>
+
+

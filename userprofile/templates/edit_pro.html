@@ -1,0 +1,126 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/dashboard.html  22 Nov 2019 10:03:13 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>plantly</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/molla/images/icons/apple-touch-icon.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static "assets/molla/images/icons/favicon-32x32.png" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "assets/molla/images/icons/favicon-16x16.png" %}">
+    <link rel="manifest" href="{% static "assets/molla/images/icons/site.html" %}">
+    <link rel="mask-icon" href="{% static "assets/molla/images/icons/safari-pinned-tab.svg" %}" color="#666666">
+    <link rel="shortcut icon" href="{% static "assets/molla/images/icons/favicon.ico" %}">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="{% static "assets/molla/images/icons/browserconfig.xml" %}">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="{% static "assets/molla/css/bootstrap.min.css" %}">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{% static "assets/molla/css/style.css" %}">
+</head>
+<style>
+    /* Apply light green background to the page-header */
+.page-header {
+    background-color: #f0fff0; /* Light green color */
+}
+
+/* Apply green color to the links in the navigation */
+.nav-dashboard .nav-link {
+    color: green !important;
+}
+
+/* Apply dark green color on hover for the links in the navigation */
+.nav-dashboard .nav-link:hover {
+    color: darkgreen !important;
+}
+
+    
+</style>
+
+<body>
+    
+
+
+
+    <div class="page-wrapper">
+        <main class="main">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="tab-content">
+                            <form action="" method='post'>
+                                {% csrf_token %}
+                                <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
+                                    <h3> Edit User Details</h3>
+                                    <div class="row mb-2">
+                                        <div class="col-md-12">
+                                            <h5>Username</h5>
+                                            <input type="text" class="form-control" name='edit_username' id="full-name" value={{user.username}} required>
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row mb-2">
+                                        <div class="col-md-12">
+                                            <h5>Email</h5>
+                                            {{cstmr.email}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row mb-2">
+                                        <div class="col-md-12">
+                                            <h5>Phone Number</h5>
+                                            <input type="number" class="form-control" name='edit_num' id="full-name" value={{user.phone}} required>
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type='submit' class="btn btn-success"> Edit Profile </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End .container -->
+        </main><!-- End .main -->
+    </div><!-- End .page-wrapper -->
+    
+
+
+
+
+
+
+        
+
+    <!-- Plugins JS File -->
+    <script src="{% static "assets/molla/js/jquery.min.js" %}"></script>
+    <script src="{% static "assets/molla/js/bootstrap.bundle.min.js" %}"></script>
+    <script src="{% static "assets/molla/js/jquery.hoverIntent.min.js" %}"></script>
+    <script src="{% static "assets/molla/js/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "assets/molla/js/superfish.min.js" %}"></script>
+    <script src="{% static "assets/molla/js/owl.carousel.min.js" %}"></script>
+    <!-- Main JS File -->
+    <script src="{% static "assets/molla/js/main.js" %}"></script>
+</body>
+
+
+<!-- molla/dashboard.html  22 Nov 2019 10:03:13 GMT -->
+</html>
+

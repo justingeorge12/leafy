@@ -1,0 +1,359 @@
+{% load static %}
+
+{% include "nav.html" %} 
+      <!-- header area end -->
+      <!-- vertical menu and slider -->
+      
+      <!-- container  menu_slider mt-4 -->
+      <!-- vertical menu and slider end -->
+      <!-- shop page -->
+
+
+      {% comment %} <div class="modal fade" id="cart_model" tabindex="-1"  aria-hidden="true">
+         <div class="modal-dialog modal_lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="row">
+                     <div class="col-sm-5 col-12">
+                        <img src="{% static "assets/img/product/product_13.jpg" %}" class="fst-image mx-auto d-block img-fluid border rounded" alt="product_13">
+                     </div>
+                     <div class="col-sm-7 col-12 ">
+                        <h5 class="font-weight-bolder border-bottom me_name ">Hummingbird printed t-shirt</h5>
+                        <div class="font-weight-bolder  border-bottom me_price">$19.12</div>
+                        <div class="me_quan">
+                           <div class="sp_counter ">
+                              <div class="input-group">
+                                 <span class="input-group-btn">
+                                 <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]"><span class="minus">-</span></button>
+                                 </span>
+                                 <input type="number" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+                                 <span class="input-group-btn">
+                                 <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]"><span class="plus">+</span></button>
+                                 </span>
+                              </div>
+                           </div>
+                           <span>
+                           <a href="cart.html" class="btn btn-primary primary mt-3">add to cart</a>
+                           </span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class=" col-12 ">
+                        <div class="border rounded final_payment">
+                           <div class="card-body  border-bottom">
+                              <p class="text-muted">5 items</p>
+                              <p class="font-weight-bolder er">show details</p>
+                           </div>
+                           <div class="card-body ">
+                              <div>
+                                 <span class="font-weight-bolder ">total(tax excl.)</span>
+                                 <span class="float-right font-weight-bolder ">$94.00</span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <a class="btn btn-primary mt-2 f_13 px-3 py-2 rounded" data-dismiss="modal">close</a>
+                  <a href="checkout.html" class="btn btn-primary mt-2 f_13 px-3 py-2 rounded">continue</a>
+               </div>
+            </div>
+         </div>
+      </div> {% endcomment %}
+
+
+      <div class="modal fade" id="cart_model" tabindex="-1"  aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="row">
+                     <div class="col-sm-5 col-12">
+                        <img src="{% static "assets/img/product/product_13.jpg" %}" class="fst-image mx-auto d-block img-fluid border rounded" alt="product_13">
+                     </div>
+                     <div class="col-sm-7 col-12">
+                        <h5 class="font-weight-bolder  border-bottom me_name">Ayansh Plants Lily Plant (Hybrid, Pack of 2)</h5>
+                        <div class="font-weight-bolder  border-bottom me_price">$19.12</div>
+                        <div class="my-2 border-bottom me_des">Fashion has been creating well-designed collections since 2010. </div>
+                        <div class="me_quan">
+                           <div class="sp_counter ">
+                              <div class="input-group">
+                                 <span class="input-group-btn">
+                                 <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]"><span class="minus">-</span></button>
+                                 </span>
+                                 <input type="number" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+                                 <span class="input-group-btn">
+                                 <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]"><span class="plus">+</span></button>
+                                 </span>
+                              </div>
+                           </div>
+                           <span>
+                           <a href="cart.html" class="btn btn-primary primary mt-3">add to cart</a>
+                           </span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div id="shop_page" class="shop-page animate__animated animate__fadeInUp">
+         <div class="container custom_container">
+            {% if messages %}
+            <ul class="messages" style="list-style: none; color:red">
+               {% for message in messages %}
+                  <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+               {% endfor %}
+            </ul>
+         {% endif %}
+            <!-- row -->
+            <div class="row">
+               <div class="col-lg-9 col-md-8">
+                  <div class="row shop_grid_list_row mb-5 bg-white p-2 p-md-1 mb-lg-3 mx-0">
+                     <div class="col-xl-2 col-sm-2 col-4 pl-0">
+                        <a href="#" id="grid" class="btn">
+                        <span class="grid_icon  p-1"><i class="fas fa-th"></i></span>
+                        </a>
+                        <a href="#" id="list" class="btn">
+                        <span class="list_icon  p-1"><i class="fas fa-list"></i></span>
+                        </a>
+                     </div>
+                     <div class="col-xl-4 d-xl-inline-block d-lg-none d-sm-none d-none">
+                        <div class="show-product pt-1"><a href="#"> There are {{count}} products. </a></div>
+                     </div>
+                     <form method='post' action="/shop/">
+                     {% csrf_token %}
+                     <div class="col-xl-6 col-sm-10 col-8 pr-0 sortpro">
+                        <div class="sort-by text-right">
+                           <div class="sort">
+                              <select class="custom-select" id="inlineFormCustomSelect">
+                                 <option selected>Relevance...</option>
+                                 <option value="1">Relevance</option>
+                                 <option value="2">Name, A to Z</option>
+                                 <option value="3">Name, Z to A</option>
+                                 <option value="3">Price, low to high</option>
+                                 <option value="3">Price, high to low</option>
+                              </select>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+                  </div>
+                  
+                  <div id="products" class="row">
+                    {% for i in item %}
+                     <div class="item col-xl-3">
+                        <div class="product_thumb bg-white rounded">
+                           <div class="pro_image">
+                              {% comment %} {% url "edit_category" i.id %} {% endcomment %}
+                              <a href="/one_product/{{i.id}}"><img src="{{i.image1.url}}" class="fst-image mx-auto d-block img-fluid" alt="product_1"></a>
+                              <a href="/one_product/{{i.id}}"><img src="{{i.image1.url}}" class="second-img mx-auto d-block img-fluid" alt="product_2"></a>
+                           </div>
+                           <div class="text-center main_text pt-3">
+                              <div>
+                                 <div class="star mb-2">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                 </div>
+                                 <h2 class="pro-heading  font-weight-bolder er mb-1	"><a href="single-product.html">{{i.name}}</a></h2>
+                                 <span><span class="font-weight-bolder  price">{{i.price}}</span> <del class="text-muted">{{i.og_price}}</del></span>
+                                 <p class="description mt-1 text-muted">{{i.description}}</p>
+                                 <div class="button-group">
+                                     <a href="/addtowish/{{i.id}}/shop"  class="symbol pro_heart ml-0" ></a>
+                                    {% comment %} <a href="#" class="symbol pro_eye"  data-toggle="modal" data-target="#eye_model"></a> {% endcomment %}
+                                    <a href="#" class="symbol pro_compare" data-toggle="modal" data-target="#compare_model "></a>	
+                                 </div>
+                                 {% comment %} <a href="#" class="symbol add_to_cart" data-toggle="modal" data-target="#cart_model">
+                                 + add to CART
+                                 </a>										 {% endcomment %}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     {% endfor %}
+
+                     <!-- item -->
+                     
+                     <!-- item -->
+                     
+                     <!-- item -->
+                  </div>
+               </div>
+               <div class="col-lg-3 col-md-4">
+                  <form action="#" id="shop_page-form" method="post" class="needs-validation" novalidate>
+                     <div class="shop_sidebar border card-body rounded bg-white">
+                        <h2 class="text-uppercase card-title  font-weight-bolder d-md-block d-none">filter by</h2>
+                        <div class="s_filter mt-0">
+                           <h6 class="text-uppercase  border-bottom font-weight-bold">Range<button class="toggle collapsed" data-toggle="collapse" data-target="#shop_range_collapse"></button></h6>
+                           <div class="collapse " id="shop_range_collapse">
+                              <div class="col-md-6 col-sm-12 pl-0 pr-md-2 pr-sm-0 pr-0">
+                                 <label class="font-weight-bolder">min</label>
+                                 <input type="number" class="form-control"  placeholder="$0">
+                              </div>
+                              <div class="col-md-6 col-sm-12 pr-0 pl-md-2 pl-sm-0 pl-0 ">
+                                 <label class="font-weight-bolder">max</label>
+                                 <input type="number" class="form-control"  placeholder="$0">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="s_filter form">
+                           <h6 class="text-uppercase  border-bottom font-weight-bold">color<button class="toggle collapsed" data-toggle="collapse" data-target="#shop_color_collapse"></button></h6>
+                           <div class="collapse" id="shop_color_collapse">
+                              <label class="form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-label font-weight-bolder">pink</span>
+                              <span class="text-right float-right font-weight-bolder">(1)</span>
+                              </label>
+                              <label class="form-check">
+                              <input class="form-check-input " type="checkbox" value="">
+                              <span class="form-check-label font-weight-bolder">yellow</span>
+                              <span class="text-right float-right font-weight-bolder">(1)</span>
+                              </label>
+                              <label class="form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-label font-weight-bolder">white</span>
+                              <span class="text-right float-right font-weight-bolder">(1)</span>
+                              </label>
+                              <label class="form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-label font-weight-bolder">black</span>
+                              <span class="text-right float-right font-weight-bolder">(1)</span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="s_filter">
+                           <h6 class="text-uppercase border-bottom font-weight-bold">brand<button class="toggle collapsed" data-toggle="collapse" data-target="#shop_brand_collapse"></button></h6>
+                           <div class="collapse" id="shop_brand_collapse">
+                              <label class="form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-label font-weight-bolder">brand1</span>
+                              <span class="text-right float-right font-weight-bolder">(1)</span>
+                              </label>
+                              <label class="form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-label font-weight-bolder">brand1</span>
+                              <span class="text-right float-right font-weight-bolder">(1)</span>
+                              </label>
+                              <label class="form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-label font-weight-bolder">another brand</span>
+                              <span class="text-right float-right font-weight-bolder">(1)</span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="s_filter">
+                           <h6 class="text-uppercase border-bottom font-weight-bold">size<button class="toggle collapsed" data-toggle="collapse" data-target="#shop_size_collapse"></button></h6>
+                           <div class="collapse" id="shop_size_collapse">
+                              <label class="form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-label font-weight-bolder">s</span>
+                              <span class="text-right float-right font-weight-bolder">(1)</span>
+                              </label>
+                              <label class="form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-label font-weight-bolder">m</span>
+                              <span class="text-right float-right font-weight-bolder">(1)</span>
+                              </label>
+                              <label class="form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-label font-weight-bolder">l</span>
+                              <span class="text-right float-right font-weight-bolder">(1)</span>
+                              </label>
+                              <label class="form-check">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-label font-weight-bolder">xl</span>
+                              <span class="text-right float-right font-weight-bolder">(1)</span>
+                              </label>
+                           </div>
+                        </div>
+                       <button id="clearButton" data-search-url="#" class="btn btn-primary clear_btn" type="reset">Clear all</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+         <div class="container custom_container">
+            <div class="row">
+               <div class="col-12">
+                  <nav class="float-right mt-5 mt-col-3">
+                     <ul class="pagination">
+                        {% if item.has_previous %}
+                        <li class="page-item">
+                           <a class="page-link" href="?page={{item.previous_page_number}} ">
+                           <span aria-hidden="true">&laquo;</span>
+                           </a>
+                        </li>
+                        {% endif %}
+                        {% for i in item.paginator.page_range %}
+                           <li class="page-item"><a class="page-link" href="?page={{i}}"><span>{{i}} </span></a></li>
+                        {% endfor %}
+                        {% if item.has_next %}
+                        <li class="page-item">
+                           <a class="page-link" href="?page={{item.next_page_number}}">
+                           <span aria-hidden="true">&raquo;</span>
+                           </a>
+                        </li>
+                        {% endif %}
+                     </ul>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- shop_page -->
+      <!-- shop page -->
+
+
+
+      <script>
+         document.addEventListener("DOMContentLoaded", function () {
+             var selectElement = document.getElementById("inlineFormCustomSelect");
+             selectElement.addEventListener("change", function () {
+                 var selectedOption = selectElement.options[selectElement.selectedIndex].value;
+                 // Send selected option value to Django view using AJAX
+                 fetch('/shop/', {
+                     method: 'POST',
+                     headers: {
+                         'Content-Type': 'application/json',
+                         'X-CSRFToken': '{{ csrf_token }}' // Ensure you have CSRF token available in your template
+                     },
+                     body: JSON.stringify({selected_option: selectedOption})
+                 }).then(response => {
+                     // Handle response if needed
+                 }).catch(error => {
+                     console.error('Error:', error);
+                 });
+             });
+         });
+     </script>
+
+
+
+{% include "footer.html" %}

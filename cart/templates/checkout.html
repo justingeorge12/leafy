@@ -1,0 +1,535 @@
+{% include "nav.html" %}
+
+<style>
+   /* Custom styling for the coupon code input */
+   #couponCode {
+       padding: 10px;
+       border: 1px solid #ccc;
+       border-radius: 5px;
+       box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+       font-size: 16px;
+       width: 250px; /* Adjust width as needed */
+       transition: border-color 0.3s ease;
+   }
+
+   /* Hover effect */
+   #couponCode:hover {
+       border-color: #999;
+   }
+
+   /* Focus effect */
+   #couponCode:focus {
+       border-color: #5cb85c; /* Bootstrap success color */
+       box-shadow: 0 0 5px rgba(92, 184, 92, 0.5);
+       outline: none;
+   }
+   
+
+
+   
+   .dropdown {
+      position: relative;
+      display: inline-block;
+  }
+
+  /* Style the dropdown content */
+  .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      width: 350px; /* Increased width */
+      padding: 10px;
+      border: 1px solid #ddd;
+      z-index: 1;
+  }
+
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+      display: block;
+  }
+   
+
+  /* Style the dropdown button */
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Show the dropdown content when the dropdown button is clicked */
+.show {
+  display: block;
+}
+
+.hr {
+   border: 1; /* Removes default border */
+   height: 1px; /* Sets the height of the hr */
+   background-color: lightgreen; /* Sets the color of the hr */
+   margin: 20px 0; /* Adjust margin as needed */
+}
+
+.code {
+   color: #e83e8c; 
+   
+}
+    
+
+
+
+</style>
+      <div id="checkout_page" class="checkout-page animate__animated animate__fadeInUp">
+         <div class="sp_header bg-white p-3 ">
+            <div class="container custom_container ">
+               <div class="row ">
+                  <div class="col-12 ">
+                     <ul>
+                        <li class="d-inline-block font-weight-bolderer"><a href="{% url "home" %}">home</a></li>
+                        <li class="d-inline-block hr_ font-weight-bolderer"><a href="#">checkout</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="container custom_container">
+            <div class="row">
+               <div class="col-lg-8 col-12">
+                  <div class="accordion" id="check_out_toggle">
+                     <div class="card rounded mb-2">
+                        <div class="tab-content" >
+                        </div>
+                     </div>
+
+                     {% comment %} <form method='post' action='/paymenthandler/' enctype="multipart/form-data"> {% endcomment %}
+                     <form method='post' action="{% url "paymenthandler" %}">
+                     {% comment %} <form method='post' action="{% url "checkk" %}"> {% endcomment %}
+                        {% csrf_token %}
+                     <!-- card -->
+                     <div class="card rounded mb-2">
+                        <div class="card-header bg-white" id="chechout_add">
+                           <h2 class="mb-0">
+                              <button class="btn btn-link btn-block text-left collapsed text-body p-0 font-weight-bolder" type="button" data-toggle="collapse" data-target="#check_add" aria-expanded="false" aria-controls="check_add">
+                              Address<span class="float-right"><i class="fas fa-angle-down"></i></span>
+                              </button>
+                           </h2>
+                        </div>
+                        <div id="check_add" class="collapse" aria-labelledby="chechout_add" data-parent="#check_out_toggle">
+                           <div class="card-body">
+                              <div id="c_address" class="page-content">
+                                 <button id="add_address_btn" class="btn btn-primary mb-3"><a href="{% url "add_addrs" %}"> Add Address </a></button>
+
+                                <div class="shipping-address border border-success rounded p-3" style="width: 100%;">
+                                    <h5 style="color: green;">Shipping Addresses</h5>
+                                    <!-- Address 1 -->
+                                    
+                                    
+                                        {% for i in addr %}
+                                        <div class="address mb-3" style="padding: 25px; border: 1px solid #28a745;">
+                                          
+                                                <input type="radio" name="selected_address" id="selected_user_id" value={{i.id}} checked > {% comment %}  {% if forloop.first %}checked{% endif %}>{% endcomment %}
+                                                {% comment %} <input type="radio" name="selected_address" value={{i.id}} checked > {% endcomment %}
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="address-detail border-right" style="border-color: #28a745;">
+                                                            <p>{{i.name}}</p>
+                                                            <p>{{i.city}}</p>
+                                                            <p>{{i.pincode}}</p>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="address-detail">
+                                                            <p>{{i.address}}</p>
+                                                            <p>{{i.state}}</p>
+                                                            <p>{{i.number}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        {% endfor %}  
+                                </div>
+                                
+
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <div class="card rounded mb-2">
+                        <div class="card-header bg-white" id="checkout_payment">
+                           <h2 class="mb-0">
+                              <button class="btn btn-link btn-block text-left collapsed text-body p-0 font-weight-bolder" type="button" data-toggle="collapse" data-target="#check_payment" aria-expanded="false" aria-controls="check_payment">
+                              Payment<span class="float-right"><i class="fas fa-angle-down"></i></span>
+                              </button>
+                           </h2>
+                        </div>
+                        <div id="check_payment"    class="collapse" aria-labelledby="checkout_payment" data-parent="#check_out_toggle">
+                           <div class="card-body">
+                              <div id="pay_check" class="page-content">
+                                    <!-- id="payment-form" -->
+                                    
+                                 
+                                    {% comment %} <div class="form-group text-left">
+                                       <label class="font-weight-bolder">payment Method</label><br>
+                                       <span class="form-check d-inline-block">
+                                          <input class="form-check-input" type="radio" name="payment_method" id="pay_by_check" >
+                                          <label class="form-check-label" for="pay_by_check">
+                                             cash on delivery
+                                          </label>
+                                       </span>
+                                       <span class="form-check d-inline-block ml-2">
+                                          <input class="form-check-input" type="radio" name="payment_method" id="rzp-button1" value="razorpay" required > <!--id="rzp-button1" -->
+                                          <label class="form-check-label" for="pay_by_bank">
+                                             razor pay 
+                                          </label>
+                                       </span> 
+                                    </div>
+                                    
+                                    <div class="text-center">
+                                       <button type="submit" class="btn btn-primary f_13">
+                                       Place Order 
+                                       </button>
+                                    </div> {% endcomment %}
+                                    <div class="checkout__order__widget">
+                                       <label for="payment-option" >Choose a payment option:</label>
+                                       <input type="hidden" id="total_amount" name="sub_total" value="{{ final_amount }}">
+               
+                                       <div class="payment-options">
+                                          {% comment %} <div class="col-md-6 mb-3">
+               
+                                             <input type="hidden" name="payment-option" value="cod">
+                                             <button type="submit" class="btn btn-danger btn-block">COD</button>
+                                          </div> {% endcomment %}
+                                          <div class="col-md-6 mb-3">
+                                             <input type="radio" id="cod" name="payment_option" value="cod" checked>
+                                             <label for="cod">COD</label>
+                                         </div>
+
+                                       {% comment %} <div class="col-md-6 mb-3">
+                                          <button type="button" id="wallet-pay" class="btn btn-danger btn-block wallet">Wallet</button>
+                                       </div> {% endcomment %}
+                                       <div class="col-md-6 mb-3">
+                                          <input type="radio" id="wallet" name="payment_option" value="wallet">
+                                          <label for="wallet">Wallet</label>
+                                      </div>
+                          
+               
+                                       {% comment %} <div class="col-md-6 mb-3">
+                                          <button type="button" id="rzp-button1"   class="btn btn-danger btn-block razor">Razorpay</button>
+                                       </div> {% endcomment %}
+                                       <div class="col-md-6 mb-3">
+                                          <input type="radio" id="pay-btn" name="payment_option" value="razorpay">
+                                          <label for="razorpay">Razorpay</label>
+                                      </div>
+
+                                      
+                                       </div>
+                                     </div> 
+
+                                     <button type="submit" class="btn btn-danger btn-block">Submit</button>
+                                
+                              </div>
+                           </div>
+                        </div>
+
+                     </div>
+                  </form>
+                  
+                     <!-- card -->
+                  </div>
+               </div>
+               <div class="col-lg-4 col-12 ">
+
+                  <form id="couponForm">
+                  <div >
+                     <div class="coupon" id="reload" >
+                        <span id="Success" class="success"></span>
+                        <span id="Error" class="error"></span>
+
+                        
+                        <input type="text"  name="coupon-Code" class="form-control m-2" id="couponCode" placeholder="Enter coupon code"   >
+                        {% csrf_token %}
+
+                        <div class="dropdown" >
+                           <button class="btn btn-info"  class="dropbtn" onclick="toggleDropdown()">Available Coupons</button>
+                           <div class="dropdown-content"  id="couponInfo" style="height: 370px; overflow-y: auto;">
+                              {% for i in coupon %}
+                                <p>name:{{i.title}} -  Code:<strong class='code'> {{i.code}} </strong> <strong style='float: right; color:orange;'>{{i.discount_amount}}off</strong> <br>Expires on: {{i.end_date}} | Minimum amount: {{i.min_amount}}</p>
+                                <hr class='hr'>
+                              {% endfor %}
+                             
+                           </div>
+                        </div>
+                         
+                        <button style="margin-right: 7px;" class="apply_coupon btn btn-primary" type="button">Apply</button>
+                        {% comment %} <a href="/remove_coupen/"><button class="btn btn-dark" type="button">Remove</button> </a> {% endcomment %}
+                       
+                     </div> <br>
+                     {% if checkout.coupon %}
+                     <a href="#" class="btn btn-success">{{checkout.coupon.code }}</a>
+                     {% endif %} 
+                  </div>
+                  </form>
+
+                     
+
+                  
+                 
+              
+
+
+                  
+                  
+                  <div class="border rounded bg-white final_payment">
+                     <div class="card-body  border-bottom">
+                        <p class="text-muted">{{cnt}} items</p> 
+                        <p class="font-weight-bolderer">show details</p>
+                        <hr>
+                        {% for i in items %}
+                        <div>
+                           <span class="font-weight-bolder">{{i.product_id.name}}</span>
+                           <span class="float-right font-weight-bolder">{{i.total}}</span>
+                        </div>
+                        {% endfor %}
+                        
+                     </div>
+                     <div class="card-body ">
+                        <div>
+                           <span class="font-weight-bolder">total</span>
+                           <span class="float-right font-weight-bolder">{{amount}}</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <!-- checkout page -->
+
+         {% include "footer.html" %}
+
+
+
+         <!--  ___________ geeks for geeks razor pay _________________ -->
+
+         <!-- Razorpay's Javascript code. -->
+      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+      <script>
+         var selectedUserId = "{{ selected_user_id }}";
+         var paymentoption = "{{ payment_option }}";
+         var options = {
+            
+            // Enter the Key ID generated from the Dashboard
+            key: "{{ razorpay_merchant_key }}", 
+            
+            // Amount is in currency subunits.
+            // Default currency is INR. Hence, 
+            // 50000 refers to 50000 paise
+            amount: "{{ razorpay_amount }}", 
+            currency: "{{ currency }}",
+            
+            // Your/store name.
+            name: "Dj Razorpay", 
+            
+            // Pass the `id` obtained in the response of Step 1
+            order_id: "{{ razorpay_order_id }}", 
+            selected_user_id: selectedUserId,
+            paymentoption:paymentoption,
+            
+            callback_url: "{{ callback_url }}",
+         };
+         
+         // initialise razorpay with the options.
+         var rzp1 = new Razorpay(options);
+         
+
+         document.querySelector('form').addEventListener('submit', function(event) {
+            // Check if the Razorpay radio button is selected
+            var razorpayRadio = document.getElementById('pay-btn');
+            if (razorpayRadio.checked) {
+               // Prevent default form submission
+               event.preventDefault();
+               
+               // Open Razorpay payment modal
+               rzp1.open();
+            }
+         });
+
+      </script>
+
+      <!--  ___________________end geeks for geeks razor pay _____________         -->
+
+
+
+
+
+
+<!--  ___________________ geeks for geeks razor pay modified for select pyment method _____________         -->
+
+
+      {% comment %} <script>
+         var selectedUserId = "{{ selected_user_id }}";
+         var options = {
+             // Enter the Key ID generated from the Dashboard
+             key: "{{ razorpay_merchant_key }}",
+             // Amount is in currency subunits.
+             // Default currency is INR. Hence,
+             // 50000 refers to 50000 paise
+             amount: "{{ razorpay_amount }}",
+             currency: "{{ currency }}",
+             // Your/store name.
+             name: "Dj Razorpay",
+             // Pass the `id` obtained in the response of Step 1
+             order_id: "{{ razorpay_order_id }}",
+             selected_user_id: selectedUserId,
+             // callback_url: "{{ callback_url }}", // Removed as it's not relevant here
+         };
+     
+         // initialise razorpay with the options.
+         var rzp1 = new Razorpay(options);
+     
+         document.querySelector('form').addEventListener('submit', function(event) {
+             // Prevent default form submission
+             event.preventDefault();
+     
+             // Check if any payment option is selected
+             var selectedPaymentOption = document.querySelector('input[name="payment_option"]:checked');
+             if (selectedPaymentOption) {
+                 // If Razorpay is selected, open the Razorpay payment modal
+                 if (selectedPaymentOption.value === 'razorpay') {
+                     rzp1.open();
+                 } else {
+                     // If other payment method is selected, proceed with form submission
+                     // Add the selected payment option to the form data
+                     var formData = new FormData(this);
+                     formData.append('payment_option', selectedPaymentOption.value);
+     
+                     // Submit the form
+                     fetch(this.action, {
+                         method: this.method,
+                         body: formData
+                     }).then(response => {
+                         // Handle response as needed
+                     }).catch(error => {
+                         // Handle error
+                     });
+                 }
+             } else {
+                 // Handle case where no payment option is selected
+                 console.error('Please select a payment option');
+             }
+         });
+     </script>
+      {% endcomment %}
+
+
+<!--  ___________________end geeks for geeks razor pay modified for select pyment method _____________         -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!--  ___________________ coupon AJAX _____________         -->
+
+      {% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+         
+
+      <script>
+         $(document).ready(function() {
+             $('#couponForm').submit(function(event) {
+                 event.preventDefault(); // Prevent the form from submitting normally
+                 var couponCode = $('#couponCode').val(); // Get the value of the input field
+                 $.ajax({
+                     type: 'POST',
+                     url: '/apply_coupon/', // Replace with the URL of your Django view function
+                     data: {
+                         'csrfmiddlewaretoken': '{{ csrf_token }}', // Include CSRF token for security
+                         'coupon_code': couponCode
+                     },
+                     success: function(response) {
+                         // Handle success response
+                         console.log(response);
+                     },
+                     error: function(xhr, errmsg, err) {
+                         // Handle error response
+                         console.log(xhr.status + ": " + xhr.responseText); // Log any errors to the console
+                     }
+                 });
+             });
+         });
+     </script> {% endcomment %}
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script>
+      $(document).ready(function () {
+          $('#reload').on('click', '.apply_coupon', function (e) {
+              e.preventDefault();
+  
+              var coupon_code = $('input[name=coupon-Code]').val()
+              var token = $('input[name=csrfmiddlewaretoken]').val()    
+              console.log(token)
+              console.log(coupon_code)
+  
+              $.ajax({
+                  method: 'POST',
+                  url: '/apply_coupon/',
+                  data: {
+                      coupon_code: coupon_code,
+                      csrfmiddlewaretoken: token
+                  },
+                  success: function (response) {
+                      if (response.status === 'Coupon applied') {
+                        document.getElementById('Success').innerHTML = response.status
+                        //alert('success :-'  + response.status);
+                          //$('#changed').load('/checkout/ #changed');
+                        //  $('#reload').load('/checkout/ #reload');
+                      }
+                      else{
+                        document.getElementById('Error').innerHTML = response.error
+                        //alert('Error :-'  + response.error);
+                        //$('#reload').load('/checkout/ #reload');
+                      }
+                  },
+                  error: function (error) {
+                  }
+              })
+          })
+      })
+  </script>
+
+
+
+        
+   </body>
+
+</html>
+

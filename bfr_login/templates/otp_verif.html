@@ -1,0 +1,134 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Bootstrap CSS -->
+                
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="">
+		<link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<link href="{%static "css/tiny-slider.css" %}" rel="stylesheet">
+		<link href="{%static "css/style.css"%}" rel="stylesheet">
+		<title>planty opt page</title>
+         
+        <style>
+            .otp-field {
+                flex-direction: row;
+                column-gap: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+              
+              .otp-field input {
+                height: 45px;
+                width: 42px;
+                border-radius: 6px;
+                outline: none;
+                font-size: 1.125rem;
+                text-align: center;
+                border: 1px solid #ddd;
+              }
+              .otp-field input:focus {
+                box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+              }
+              .otp-field input::-webkit-inner-spin-button,
+              .otp-field input::-webkit-outer-spin-button {
+                display: none;
+              }
+              
+              .resend {
+                font-size: 12px;
+              }
+              
+              .footer {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                color: light green;
+                font-size: 12px;
+                text-align: right;
+                font-family: monospace;
+              }
+              
+              .footer a {
+                color: green;
+                text-decoration: none;
+              }
+              
+                input[type="number"]::-webkit-outer-spin-button,
+                input[type="number"]::-webkit-inner-spin-button {
+                  -webkit-appearance: none;
+            }
+        
+        </style>  
+	</head>
+
+	<body>
+
+		<!-- Start Header/Navigation -->
+		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark " arial-label="Furni navigation bar">
+
+			<div class="container ">
+				<a class="navbar-brand mx-auto" href="/">Planty<span>.</span></a>
+			</div>
+				
+		</nav>
+		<!-- otp verification -->
+    {% comment %} <form action='otp_verif' id="otpform" method='post'> {% endcomment %}
+    <form action="" method='post'>
+
+      {% csrf_token %}
+        <section class="container-fluid bg-body-tertiary d-block">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 col-lg-4" style="min-width: 500px;">
+                  <div class="card bg-white mb-5 mt-5 border-0" style="box-shadow: 0 12px 15px rgba(0, 0, 0, 0.02);">
+                    <div class="card-body p-5 text-center">
+                      <h4>Verify</h4>
+                      <p> check the code we have sent to your gmail</p>
+          
+                      <input name='otp' type="number" required />
+          
+                      <button type='subimt'class="btn btn-success">
+                        Verify
+                      </button>
+                      <br><br>
+
+                      {% if messages %}
+								        <div class="alert alert-success mt-3">
+								        {% for message in messages %}
+								          {{ message }}
+								        {% endfor %}
+								        </div>
+								      {% endif %}
+          
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </section>
+        </form>
+  
+           
+    
+
+
+		<script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+		<script src="{% static "js/tiny-slider.js" %}"></script>
+		<script src="{% static "js/custom.js" %}"></script>
+    
+	</body>
+
+</html>
